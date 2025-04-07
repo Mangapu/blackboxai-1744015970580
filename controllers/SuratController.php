@@ -3,9 +3,11 @@ require_once __DIR__ . '/../models/SuratModel.php';
 
 class SuratController {
     private $suratModel;
+    private $db;
 
     public function __construct() {
         $this->suratModel = new SuratModel();
+        $this->db = Database::getInstance()->getConnection();
     }
 
     public function addSuratMasuk($nomor_surat, $tanggal, $perihal, $pengirim) {
@@ -38,7 +40,8 @@ class SuratController {
             $searchParam = "%$search%";
             $stmt->bindParam(':search', $searchParam);
         }
-        return $this->suratModel->getSuratKeluar();
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function deleteSuratMasuk($id) {
