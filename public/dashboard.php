@@ -6,6 +6,18 @@ $auth = new AuthController();
 $auth->redirectIfNotLoggedIn();
 
 $suratController = new SuratController();
+
+// Handle delete request
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['delete_masuk'])) {
+        $suratController->deleteSuratMasuk($_POST['delete_id']);
+    } elseif (isset($_POST['delete_keluar'])) {
+        $suratController->deleteSuratKeluar($_POST['delete_id']);
+    }
+    header('Location: dashboard.php');
+    exit();
+}
+
 $totalMasuk = $suratController->getTotalSuratMasuk();
 $totalKeluar = $suratController->getTotalSuratKeluar();
 $suratMasuk = $suratController->getSuratMasuk();
@@ -28,6 +40,18 @@ $suratKeluar = $suratController->getSuratKeluar();
     <div class="flex">
         <main class="flex-1 p-8">
             <h1 class="text-2xl font-bold text-gray-800 mb-6">Dashboard</h1>
+            
+            <!-- Form Pencarian Surat -->
+            <div class="mb-6">
+                <form method="GET" action="dashboard.php" class="flex space-x-4">
+                    <input type="text" name="search" placeholder="Cari surat..." 
+                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    <button type="submit" 
+                        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <i class="fas fa-search"></i> Cari
+                    </button>
+                </form>
+            </div>
             
             <!-- Statistik Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -80,6 +104,14 @@ $suratKeluar = $suratController->getSuratKeluar();
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?= htmlspecialchars($surat['nomor_surat']) ?></td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?= date('d/m/Y', strtotime($surat['tanggal'])) ?></td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?= htmlspecialchars($surat['pengirim']) ?></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <form method="POST" action="dashboard.php" class="inline">
+                                            <input type="hidden" name="delete_id" value="<?= $surat['id'] ?>">
+                                            <button type="submit" name="delete_masuk" class="text-red-600 hover:text-red-800">
+                                                <i class="fas fa-trash"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -109,6 +141,14 @@ $suratKeluar = $suratController->getSuratKeluar();
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?= htmlspecialchars($surat['nomor_surat']) ?></td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?= date('d/m/Y', strtotime($surat['tanggal'])) ?></td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?= htmlspecialchars($surat['tujuan']) ?></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <form method="POST" action="dashboard.php" class="inline">
+                                            <input type="hidden" name="delete_id" value="<?= $surat['id'] ?>">
+                                            <button type="submit" name="delete_keluar" class="text-red-600 hover:text-red-800">
+                                                <i class="fas fa-trash"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
