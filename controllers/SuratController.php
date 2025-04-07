@@ -26,8 +26,27 @@ class SuratController {
         return $this->suratModel->getSuratMasuk();
     }
 
-    public function getSuratKeluar() {
+    public function getSuratKeluar($search = null) {
+        $query = "SELECT * FROM surat_keluar";
+        if ($search) {
+            $query .= " WHERE perihal LIKE :search OR tujuan LIKE :search";
+        }
+        $query .= " ORDER BY tanggal DESC";
+        
+        $stmt = $this->db->prepare($query);
+        if ($search) {
+            $searchParam = "%$search%";
+            $stmt->bindParam(':search', $searchParam);
+        }
         return $this->suratModel->getSuratKeluar();
+    }
+
+    public function deleteSuratMasuk($id) {
+        return $this->suratModel->deleteSuratMasuk($id);
+    }
+
+    public function deleteSuratKeluar($id) {
+        return $this->suratModel->deleteSuratKeluar($id);
     }
 
     public function getTotalSuratMasuk() {
