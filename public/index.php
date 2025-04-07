@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="text-center mb-8">
             <h1 class="text-2xl font-bold text-gray-800">KECAMATAN MASAMA</h1>
             <p class="text-gray-600">Kabupaten Banggai</p>
-            <h2 class="text-xl font-semibold mt-4">Sistem Surat Masuk/Keluar</h2>
+            <h2 class="text-xl font-semibold mt-4">Agenda Surat Masuk/Keluar</h2>
         </div>
         
         <?php if ($error): ?>
