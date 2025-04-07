@@ -26,8 +26,6 @@ $suratKeluar = $suratController->getSuratKeluar();
     <?php include 'includes/header.php'; ?>
     
     <div class="flex">
-        <?php include 'includes/nav.php'; ?>
-        
         <main class="flex-1 p-8">
             <h1 class="text-2xl font-bold text-gray-800 mb-6">Dashboard</h1>
             
@@ -56,12 +54,6 @@ $suratKeluar = $suratController->getSuratKeluar();
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Grafik -->
-            <div class="bg-white p-6 rounded-lg shadow mb-8">
-                <h2 class="text-lg font-semibold text-gray-700 mb-4">Statistik Bulanan</h2>
-                <canvas id="statistikChart" height="150"></canvas>
             </div>
             
             <!-- Daftar Surat Terbaru -->
