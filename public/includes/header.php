@@ -6,10 +6,10 @@ $auth = new AuthController();
     <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <div class="flex items-center">
             <div class="flex-shrink-0">
-                <img class="h-10 w-auto" src="assets/logo.png" alt="Logo Kecamatan Masama">
+                <img class="h-10 w-auto" src="assets/banggai.png" alt="Logo Kabupaten Banggai">
             </div>
             <div class="ml-4">
-                <h1 class="text-xl font-bold text-gray-900">Sistem Surat</h1>
+                <h1 class="text-xl font-bold text-gray-900">Agenda Surat</h1>
                 <p class="text-sm text-gray-500">Kecamatan Masama, Kab. Banggai</p>
             </div>
         </div>
