@@ -24,8 +24,26 @@ class SuratController {
         return false; // Nomor surat already exists
     }
 
-    public function getSuratMasuk() {
-        return $this->suratModel->getSuratMasuk();
+    public function getSuratMasuk($search = null) {
+        try {
+            $query = "SELECT * FROM surat_masuk";
+            if ($search) {
+                $query .= " WHERE perihal LIKE ? OR pengirim LIKE ?";
+            }
+            $query .= " ORDER BY tanggal DESC";
+            
+            $stmt = $this->db->prepare($query);
+            if ($search) {
+                $searchTerm = "%$search%";
+                $stmt->execute([$searchTerm, $searchTerm]);
+            } else {
+                $stmt->execute();
+            }
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Database error: " . $e->getMessage());
+            return [];
+        }
     }
 
     public function getSuratKeluar($search = null) {
