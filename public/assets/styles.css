@@ -49,6 +49,15 @@ input:valid {
     transition: all 300ms ease-in;
 }
 
+/* Login Page Styles */
+.login-logo {
+    display: block;
+    margin: 0 auto 1rem;
+    width: 80px;
+    height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
 /* Print styles */
 @media print {
     nav, footer {
