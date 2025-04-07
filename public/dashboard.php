@@ -20,8 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $totalMasuk = $suratController->getTotalSuratMasuk();
 $totalKeluar = $suratController->getTotalSuratKeluar();
-$suratMasuk = $suratController->getSuratMasuk();
-$suratKeluar = $suratController->getSuratKeluar();
+$searchTerm = isset($_GET['search']) ? trim($_GET['search']) : null;
+$suratMasuk = $suratController->getSuratMasuk($searchTerm);
+$suratKeluar = $suratController->getSuratKeluar($searchTerm);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -41,6 +42,14 @@ $suratKeluar = $suratController->getSuratKeluar();
         <main class="flex-1 p-8">
             <h1 class="text-2xl font-bold text-gray-800 mb-6">Dashboard</h1>
             
+            <!-- Debug Info -->
+            <?php if ($searchTerm): ?>
+            <div class="bg-blue-50 p-4 mb-4 rounded-lg">
+                <p class="text-sm">Hasil pencarian untuk: <span class="font-semibold"><?= htmlspecialchars($searchTerm) ?></span></p>
+                <p class="text-sm">Ditemukan <?= count($suratMasuk) ?> surat masuk dan <?= count($suratKeluar) ?> surat keluar</p>
+            </div>
+            <?php endif; ?>
+
             <!-- Form Pencarian Surat -->
             <div class="mb-6">
                 <form method="GET" action="dashboard.php" class="flex space-x-4">
