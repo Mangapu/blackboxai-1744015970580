@@ -9,6 +9,12 @@ class SuratModel {
     }
 
     // Surat Masuk Methods
+    public function deleteSuratMasuk($id) {
+        $stmt = $this->db->prepare("DELETE FROM surat_masuk WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
+
     public function createSuratMasuk($nomor_surat, $tanggal, $perihal, $pengirim) {
         $stmt = $this->db->prepare("INSERT INTO surat_masuk (nomor_surat, tanggal, perihal, pengirim) VALUES (:nomor, :tanggal, :perihal, :pengirim)");
         $stmt->bindParam(':nomor', $nomor_surat);
