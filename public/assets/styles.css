@@ -1,0 +1,62 @@
+/* Custom styles for the application */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Table styling */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    background-color: #f9fafb;
+}
+
+tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+/* Form validation */
+input:invalid {
+    border-color: #f87171;
+}
+
+input:valid {
+    border-color: #34d399;
+}
+
+/* Animation for alerts */
+.alert-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.alert-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 300ms ease-out;
+}
+
+.alert-exit {
+    opacity: 1;
+}
+
+.alert-exit-active {
+    opacity: 0;
+    transition: all 300ms ease-in;
+}
+
+/* Print styles */
+@media print {
+    nav, footer {
+        display: none;
+    }
+    
+    body {
+        padding: 0;
+        margin: 0;
+    }
+}
